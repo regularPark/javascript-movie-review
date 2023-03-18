@@ -166,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass Skeleton {\n    constructor() {\n        this.template = `<li class=\"skeleton\">\n  <a href=\"#\">\n    <div class=\"item-card\">\n      <div class=\"item-thumbnail skeleton\"></div>\n      <div class=\"item-title skeleton\"></div>\n      <div class=\"item-score skeleton\"></div>\n    </div>\n  </a>\n</li>`;\n    }\n    render() {\n        return this.template;\n    }\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Skeleton);\n\n\n//# sourceURL=webpack://javascript-movie-review/./src/components/Skeleton.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass Skeleton {\n    constructor() {\n        this.template = `\n  <li class=\"skeleton\">\n    <a href=\"#\">\n      <div class=\"item-card\">\n        <div class=\"item-thumbnail skeleton\"></div>\n        <div class=\"item-title skeleton\"></div>\n        <div class=\"item-score skeleton\"></div>\n      </div>\n    </a>\n  </li>`;\n    }\n    render() {\n        return this.template;\n    }\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Skeleton);\n\n\n//# sourceURL=webpack://javascript-movie-review/./src/components/Skeleton.ts?");
 
 /***/ }),
 
