@@ -113,7 +113,6 @@ export class MovieList {
   async showModal() {
     document.querySelector('.item-view')?.addEventListener('click', async (e) => {
       const id = (e.target as HTMLLIElement).closest('.item-card')?.id;
-      const numberId = Number(id);
       if (id) {
         (document.querySelector('.modal') as HTMLDialogElement).showModal();
         const rate = getLocalStorage(id);

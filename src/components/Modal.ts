@@ -1,8 +1,4 @@
 class Modal {
-  constructor() {
-    this.init();
-  }
-
   template = `
     <dialog class="modal"></dialog>
 `;
