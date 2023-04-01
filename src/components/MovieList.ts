@@ -1,13 +1,13 @@
-import { Movie } from '../movies.type';
-import { TMDBErrorResponse, TMDBResponse } from '../response.type';
 import store from '../store';
+import { Movie } from '../types/movies.type';
+import { MovieErrorResponse, MovieResponse } from '../types/response.type';
 import { getLocalStorage } from '../util/LocalStorage';
 import DetailModal from './DetailModal';
 import ErrorPopup from './ErrorPopup';
 import MovieListItem from './MovieListItem';
 import Skeleton from './Skeleton';
 
-export type MoviesGenerator = (page: number) => Promise<TMDBResponse>;
+export type MoviesGenerator = (page: number) => Promise<MovieResponse>;
 
 export class MovieList {
   private isFinished = false;
@@ -53,7 +53,7 @@ export class MovieList {
     this.page += 1;
 
     try {
-      const response: TMDBResponse = await this.fetchFn(page);
+      const response: MovieResponse = await this.fetchFn(page);
 
       const movies = response.results;
       store.setMovies(movies);
@@ -66,7 +66,7 @@ export class MovieList {
 
       this.isFinished = true;
     } catch (e) {
-      const error = e as Error | TMDBErrorResponse;
+      const error = e as Error | MovieErrorResponse;
       this.createSkeletons();
 
       const errorMessage = this.getErrorMessage(error);
@@ -76,7 +76,7 @@ export class MovieList {
     this.removeSkeleton();
   }
 
-  private getErrorMessage(error: Error | TMDBErrorResponse) {
+  private getErrorMessage(error: Error | MovieErrorResponse) {
     // eslint-disable-next-line no-nested-ternary
     return 'message' in error
       ? error.message
@@ -135,7 +135,7 @@ export class MovieList {
         if (!entry.isIntersecting) return;
         if (this.isFinished) return;
         this.nextPage().then(() => {
-          const eventTarget = document.querySelector('li:nth-last-child(5)');
+          const eventTarget = document.querySelector('li:last-child');
           io.disconnect();
           if (eventTarget) io.observe(eventTarget);
         });

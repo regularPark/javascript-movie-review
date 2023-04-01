@@ -27,7 +27,6 @@ class Modal {
 
   closeModal = () => {
     const modal = <HTMLDialogElement>document.querySelector('.modal');
-    document.body.style.removeProperty('overflow');
     modal.close();
   };
 }

@@ -4,9 +4,9 @@ import Modal from './components/Modal';
 import { MovieList } from './components/MovieList';
 import { TopButton } from './components/TopButton';
 import { POPULAR_MOVIES, SEARCH_RESULT } from './constants';
-import MovieAPI from './MovieAPI';
-import { TMDBGenres } from './response.type';
+import MovieAPI from './domain/MovieAPI';
 import store from './store';
+import { MovieGenres } from './types/response.type';
 
 const init = () => {
   const modal = new Modal();
@@ -52,7 +52,7 @@ searchBox.addEventListener('mouseleave', () => {
   searchBox.reset();
 });
 
-const response: Promise<TMDBGenres> = MovieAPI.getGenreList();
+const response: Promise<MovieGenres> = MovieAPI.getGenreList();
 
 response.then((res) => {
   res.genres.forEach((genre) => {
@@ -61,7 +61,7 @@ response.then((res) => {
 });
 
 const scrollToTop = () => {
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 document.querySelector('.scroll-to-top')?.addEventListener('click', scrollToTop);

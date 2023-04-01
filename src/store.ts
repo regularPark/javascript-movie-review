@@ -1,4 +1,4 @@
-import { Movie } from './movies.type';
+import { Movie } from './types/movies.type';
 
 class Store {
   private movieList: Movie[] = [];
@@ -14,7 +14,7 @@ class Store {
   }
 
   getMovie(id: number) {
-    return this.movieList.find((movie) => movie.id === id)!;
+    return this.movieList.find((movie) => movie.id === id);
   }
 
   setGenres(id: number, name: string) {

@@ -1,5 +1,5 @@
-import { Movie } from '../movies.type';
 import store from '../store';
+import { Movie } from '../types/movies.type';
 import Rate from './Rate';
 
 /* eslint camelcase: ["error", {ignoreDestructuring: true}] */
@@ -44,13 +44,12 @@ class DetailModal {
 
   init() {
     this.render();
-    document.body.style.overflow = 'hidden';
     this.addEvent();
   }
 
   render() {
     (this.modal as HTMLDialogElement).insertAdjacentHTML('beforeend', this.template(this.movie));
-    document.querySelector('.user-score')?.insertAdjacentHTML('beforeend', Rate.template);
+    document.querySelector('.user-score')?.insertAdjacentHTML('beforeend', Rate.template());
     if (this.rate) Rate.renderStar(this.rate);
   }
 
@@ -60,7 +59,6 @@ class DetailModal {
   }
 
   closeModal = () => {
-    document.body.style.removeProperty('overflow');
     this.modal.close();
   };
 }

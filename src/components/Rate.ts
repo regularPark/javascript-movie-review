@@ -2,46 +2,38 @@ import { ratingComment } from '../constants';
 import { setLocalStorage } from '../util/LocalStorage';
 
 const Rate = {
-  template: `
+  template() {
+    return `
     <div class="star-wrapper">
-    <p>내 별점</p> 
-        <span class="star">
-            <img src="assets/star_empty.png" alt="별점" />
-            <img src="assets/star_empty.png" alt="별점" />
-            <img src="assets/star_empty.png" alt="별점" />
-            <img src="assets/star_empty.png" alt="별점" />
-            <img src="assets/star_empty.png" alt="별점" />
-            <span>
-                <img src="assets/star_filled.png" alt="별점" />
-                <img src="assets/star_filled.png" alt="별점" />
-                <img src="assets/star_filled.png" alt="별점" />
-                <img src="assets/star_filled.png" alt="별점" />
-                <img src="assets/star_filled.png" alt="별점" />
-            </span>
-            <input type="range" value="2" step="2" min="2" max="10">
-        </span>
+      <p>내 별점</p> 
+        <div class="star">
+          <input type="radio" name="rating" value="10" id="rate10"><label for="rate10"><img src="assets/star_filled.png"></label>
+          <input type="radio" name="rating" value="8" id="rate8"><label for="rate8"><img src="assets/star_filled.png"></label>
+          <input type="radio" name="rating" value="6" id="rate6"><label for="rate6"><img src="assets/star_filled.png"></label>
+          <input type="radio" name="rating" value="4" id="rate4"><label for="rate4"><img src="assets/star_filled.png"></label>
+          <input type="radio" name="rating" value="2" id="rate2"><label for="rate2"><img src="assets/star_filled.png"></label>
+        </div>
     </div>
-    <p class="rating-text"></p>`,
-  saveRate(id: number) {
-    setLocalStorage(
-      String(id),
-      JSON.stringify((<HTMLInputElement>document.querySelector('.star input')).value),
-    );
+    <p class="rating-text"></p>`;
+  },
+  saveRate(id: number, rate: string) {
+    setLocalStorage(String(id), JSON.stringify(rate));
   },
 
   listener(id: number) {
-    const starInput = <HTMLInputElement>document.querySelector('.star input');
-    const starSpan = <HTMLImageElement>document.querySelector('.star span');
     const ratingText = <HTMLParagraphElement>document.querySelector('.rating-text');
-    starInput?.addEventListener('input', () => {
-      starSpan.style.width = `${Number(starInput.value) * 10}%`;
-      Rate.saveRate(id);
-      ratingText.textContent = this.ratingText(starInput.value);
+    const stars = document.querySelector('.star');
+    stars?.addEventListener('click', (e) => {
+      if (!(e.target instanceof HTMLInputElement)) return;
+      const rate = (<HTMLInputElement>e.target).value;
+      ratingText.textContent = this.ratingText(rate);
+      this.saveRate(id, rate);
     });
   },
 
   renderStar(rate: string) {
-    (<HTMLImageElement>document.querySelector('.star span')).style.width = `${Number(rate) * 10}%`;
+    const stars = <HTMLInputElement>document.querySelector(`#rate${rate}`);
+    stars.checked = true;
     (<HTMLParagraphElement>document.querySelector('.rating-text')).textContent =
       this.ratingText(rate);
   },

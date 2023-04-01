@@ -1,4 +1,4 @@
-import { Movie } from '../movies.type';
+import { Movie } from '../types/movies.type';
 
 class MovieListItem {
   constructor(private readonly movie: Movie) {}
@@ -27,10 +27,6 @@ class MovieListItem {
 `;
 
   render() {
-    if (this.movie.poster_path)
-      document.querySelector('.item-thumbnail')?.addEventListener('load', (e) => {
-        (e.target as HTMLImageElement).classList.remove('skeleton');
-      });
     this.li.innerHTML = this.template(this.movie);
     return this.li;
   }
