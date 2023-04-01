@@ -1,5 +1,4 @@
 import MovieAPI from '../domain/MovieAPI';
-import store from '../store';
 import { Movie } from '../types/movies.type';
 import { MovieDetailResponse, MovieErrorResponse, MovieResponse } from '../types/response.type';
 import { getLocalStorage } from '../util/LocalStorage';
@@ -57,7 +56,6 @@ export class MovieList {
       const response: MovieResponse = await this.fetchFn(page);
 
       const movies = response.results;
-      store.setMovies(movies);
       const totalPages = response.total_pages;
       await new Promise((resolve) => {
         setTimeout(resolve, 500);

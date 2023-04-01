@@ -5,8 +5,6 @@ import { MovieList } from './components/MovieList';
 import { TopButton } from './components/TopButton';
 import { POPULAR_MOVIES, SEARCH_RESULT } from './constants';
 import MovieAPI from './domain/MovieAPI';
-import store from './store';
-import { MovieGenres } from './types/response.type';
 
 const init = () => {
   const modal = new Modal();
@@ -28,7 +26,6 @@ assignMovieList(new MovieList(popularFetchFn, POPULAR_MOVIES));
 
 document.querySelector('.logo')?.addEventListener('click', () => {
   assignMovieList(new MovieList(popularFetchFn, POPULAR_MOVIES));
-  store.initializeList();
 });
 
 document.querySelector('.search-box')?.addEventListener('submit', (event) => {
@@ -50,14 +47,6 @@ searchBox.addEventListener('mouseleave', () => {
   if (!searchBox.classList.contains('active')) return;
   searchBox.classList.remove('active');
   searchBox.reset();
-});
-
-const response: Promise<MovieGenres> = MovieAPI.getGenreList();
-
-response.then((res) => {
-  res.genres.forEach((genre) => {
-    store.setGenres(genre.id, genre.name);
-  });
 });
 
 const scrollToTop = () => {

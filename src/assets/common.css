@@ -382,6 +382,7 @@ ul.item-list:not(:has(:first-child)) ~ h3 {
 
 .star label {
   filter: opacity(0.3) drop-shadow(0 0 0 #fff);
+  cursor: pointer;
 }
 
 .star label:hover {
