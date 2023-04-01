@@ -15,3 +15,12 @@ export type MovieErrorResponse = {
 export type MovieGenres = {
   genres: Genre[];
 };
+
+export type MovieDetailResponse = {
+  title: string;
+  id: number;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
+  genres: Array<{ id: number; name: string }>;
+};

@@ -1,4 +1,4 @@
-import { MovieGenres, MovieResponse } from '../types/response.type';
+import { MovieDetailResponse, MovieGenres, MovieResponse } from '../types/response.type';
 import { MovieFetcher } from './MovieFetcher';
 
 class MovieAPI {
@@ -20,6 +20,13 @@ class MovieAPI {
     return MovieFetcher.fetch(
       '/genre/movie/list',
       `?api_key=${process.env.TMDB_API_KEY}&language=ko-KR`,
+    );
+  }
+
+  async getDetail(id: string): Promise<MovieDetailResponse> {
+    return MovieFetcher.fetch(
+      '/movie/',
+      `${id}?api_key=${process.env.TMDB_API_KEY}&language=ko-KR`,
     );
   }
 }

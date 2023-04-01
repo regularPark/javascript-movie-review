@@ -1,4 +1,4 @@
-import { MovieGenres, MovieResponse } from '../types/response.type';
+import { MovieDetailResponse, MovieGenres, MovieResponse } from '../types/response.type';
 
 type MovieGetMoviePopular = {
   path: '/movie/popular';
@@ -10,6 +10,12 @@ type MovieSearchMovie = {
   response: MovieResponse;
 };
 
+type MovieDetail = {
+  path: '/movie/';
+  response: MovieDetailResponse;
+};
+
+// 삭제 예정
 type MovieGetGenre = {
   path: '/genre/movie/list';
   response: MovieGenres;
@@ -17,7 +23,7 @@ type MovieGetGenre = {
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-type MovieAPI = MovieGetMoviePopular | MovieGetGenre | MovieSearchMovie;
+type MovieAPI = MovieGetMoviePopular | MovieGetGenre | MovieSearchMovie | MovieDetail;
 
 export const MovieFetcher = {
   async fetch<Path extends MovieAPI['path']>(

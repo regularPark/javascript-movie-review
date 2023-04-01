@@ -27,6 +27,7 @@ class Modal {
 
   closeModal = () => {
     const modal = <HTMLDialogElement>document.querySelector('.modal');
+    modal.replaceChildren();
     modal.close();
   };
 }

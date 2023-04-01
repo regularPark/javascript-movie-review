@@ -1,6 +1,7 @@
+import MovieAPI from '../domain/MovieAPI';
 import store from '../store';
 import { Movie } from '../types/movies.type';
-import { MovieErrorResponse, MovieResponse } from '../types/response.type';
+import { MovieDetailResponse, MovieErrorResponse, MovieResponse } from '../types/response.type';
 import { getLocalStorage } from '../util/LocalStorage';
 import DetailModal from './DetailModal';
 import ErrorPopup from './ErrorPopup';
@@ -111,16 +112,16 @@ export class MovieList {
     await this.load();
   }
 
-  showModal() {
-    document.querySelector('.item-view')?.addEventListener('click', (e) => {
+  async showModal() {
+    document.querySelector('.item-view')?.addEventListener('click', async (e) => {
       const id = (e.target as HTMLLIElement).closest('.item-card')?.id;
       const numberId = Number(id);
       if (id) {
         (document.querySelector('.modal') as HTMLDialogElement).showModal();
         const rate = getLocalStorage(id);
-        return typeof rate === 'object'
-          ? new DetailModal(<Movie>store.getMovie(numberId))
-          : new DetailModal(<Movie>store.getMovie(numberId), rate);
+        const movie: MovieDetailResponse = await MovieAPI.getDetail(id);
+
+        return typeof rate === 'object' ? new DetailModal(movie) : new DetailModal(movie, rate);
       }
       return null;
     });

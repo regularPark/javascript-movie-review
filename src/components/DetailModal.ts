@@ -1,18 +1,24 @@
-import store from '../store';
-import { Movie } from '../types/movies.type';
+import { MovieDetailResponse } from '../types/response.type';
 import Rate from './Rate';
 
 /* eslint camelcase: ["error", {ignoreDestructuring: true}] */
 class DetailModal {
   modal: HTMLDialogElement;
 
-  constructor(private readonly movie: Movie, private readonly rate?: string) {
+  constructor(private readonly movie: MovieDetailResponse, private readonly rate?: string) {
     this.modal = document.querySelector('.modal') as HTMLDialogElement;
     this.modal.replaceChildren();
     this.init();
   }
 
-  private template = ({ id, title, poster_path, overview, vote_average, genre_ids }: Movie) => `
+  private template = ({
+    id,
+    title,
+    poster_path,
+    overview,
+    vote_average,
+    genres,
+  }: MovieDetailResponse) => `
           <div class="modal-container" id="${id}">
               <div class="title-wrapper">
                   <p class="modal-title">${title} 
@@ -30,8 +36,8 @@ class DetailModal {
                   />
                   <div class="modal-info">
                       <div class="modal-genre-score">
-                          <p class="modal-genres">${genre_ids
-                            .map((genreId) => store.getGenres(genreId))
+                          <p class="modal-genres">${genres
+                            .map((genre) => genre.name)
                             .join(', ')}</p>
                           <p class="modal-score"><img src="assets/star_filled.png" alt="별점" /> ${vote_average}</p>
                           <p class="modal-overview">${overview}</p>
@@ -55,10 +61,11 @@ class DetailModal {
 
   addEvent() {
     document.querySelector('.close-button')?.addEventListener('click', this.closeModal);
-    Rate.listener((this.movie as Movie).id);
+    Rate.listener((this.movie as MovieDetailResponse).id);
   }
 
   closeModal = () => {
+    this.modal.replaceChildren();
     this.modal.close();
   };
 }
