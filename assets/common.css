@@ -376,34 +376,32 @@ ul.item-list:not(:has(:first-child)) ~ h3 {
   align-items: center;
 }
 
-.star {
-  position: relative;
-  width: 150px;
-}
-
-.star img {
-  width: 24px;
-  overflow: hidden;
-}
-
-.star span {
-  position: absolute;
-  right: 0;
-  left: 0;
-  width: 0;
-  height: 25px;
-  overflow: hidden;
-}
-
 .star input {
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
+  display: none;
 }
 
-.star p {
-  width: 100px;
+.star label {
+  filter: opacity(0.3) drop-shadow(0 0 0 #fff);
+}
+
+.star label:hover {
+  filter: opacity(1);
+}
+
+.star label:hover ~ label {
+  filter: opacity(1);
+}
+
+.star {
+  direction: rtl;
+}
+
+.star input[type='radio']:checked ~ label {
+  filter: opacity(1);
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /** scroll-to-top *********************/
@@ -462,7 +460,7 @@ ul.item-list:not(:has(:first-child)) ~ h3 {
 
   .item-thumbnail {
     width: 140px;
-    height: auto;
+    height: 210px; /* pixel로 변경해야 스켈레톤 이벤트를 뺄 수 있다 */
   }
 
   h1 > img {
