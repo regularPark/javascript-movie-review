@@ -14,9 +14,9 @@ class DetailModal {
   private template = ({
     id,
     title,
-    poster_path,
+    poster_path: posterPath,
     overview,
-    vote_average,
+    vote_average: voteAverage,
     genres,
   }: MovieDetailResponse) => `
           <div class="modal-container" id="${id}">
@@ -30,7 +30,7 @@ class DetailModal {
               <div class="modal-card">
                   <img
                     class="modal-thumbnail skeleton"
-                    src="https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}"
+                    src="https://image.tmdb.org/t/p/w220_and_h330_face${posterPath}"
                     loading="lazy"
                     alt="${title}"
                   />
@@ -39,7 +39,7 @@ class DetailModal {
                           <p class="modal-genres">${genres
                             .map((genre) => genre.name)
                             .join(', ')}</p>
-                          <p class="modal-score"><img src="assets/star_filled.png" alt="별점" /> ${vote_average}</p>
+                          <p class="modal-score"><img src="assets/star_filled.png" alt="별점" /> ${voteAverage}</p>
                           <p class="modal-overview">${overview}</p>
                       </div>
                       <div class="user-score"></div>

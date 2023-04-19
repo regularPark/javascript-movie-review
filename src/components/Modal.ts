@@ -15,9 +15,8 @@ class Modal {
   addEvent = () => {
     const modal = <HTMLDialogElement>document.querySelector('.modal');
     modal.addEventListener('click', (event) => {
-      if ((event.target as Element).nodeName === 'DIALOG') {
-        this.closeModal();
-      }
+      if (!((event.target as Element).nodeName === 'DIALOG')) return;
+      this.closeModal();
     });
   };
 
